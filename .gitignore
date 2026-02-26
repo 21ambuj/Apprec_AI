@@ -1,0 +1,39 @@
+
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment variables
+.env
+server/.env
+client/.env
+
+# Build outputs
+dist/
+client/dist/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server/*.log
+client/*.log
+
+# Temporary/Cache files
+.npm
+.eslintcache
+.parcel-cache
+
+# Local storage for Puter/Gemini if any
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/

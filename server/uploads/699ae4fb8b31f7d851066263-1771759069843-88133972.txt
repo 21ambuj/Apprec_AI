@@ -1,0 +1,10 @@
+John Doe
+john.doe@example.com
+123-456-7890
+New York, USA
+Software Engineer with 5 years of experience in React and Node.js.
+Experience:
+Software Engineer at TechCorp (2020-Present): Developed web applications.
+Education:
+B.S. Computer Science, University of Technology, 2019
+Skills: React, Node.js, JavaScript
