@@ -1,4 +1,4 @@
-# 🚀 AI-Powered Smart Recruitment Platform
+# 🚀 Apprec AI — A Career Platform for Jobs, Skills And Growth
 
 A cutting-edge, professional recruitment ecosystem designed to bridge the gap between talented candidates and top-tier recruiters using Artificial Intelligence.
 
