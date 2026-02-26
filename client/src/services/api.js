@@ -2,13 +2,13 @@
 import axios from 'axios';
 
 const getBaseURL = () => {
-    // Check if running in a Puter.com environment
-    if (window.location.hostname.includes('puter.site') || window.location.hostname.includes('puter.com')) {
-        // Many Puter apps expose backend on port 5000 via a specific subdomain
-        // We try to use a relative path if they are on the same domain, or construct the Puter proxy URL
+    // In production, the frontend and backend are on the same domain
+    // Using relative path '/api' ensures compatibility with hosting services like Render
+    if (process.env.NODE_ENV === 'production' || !window.location.hostname.includes('localhost')) {
         return '/api';
     }
-    // Default to localhost for local development
+    // Default to localhost for local development if needed, 
+    // but '/api' works locally too if we use a proxy or serve static files.
     return 'http://localhost:5000/api';
 };
 

@@ -1,0 +1,13 @@
+{
+    "name": "apprec-ai-root",
+    "version": "1.0.0",
+    "description": "Root package for AI Recruitment Platform",
+    "scripts": {
+        "install-client": "cd client && npm install",
+        "install-server": "cd server && npm install",
+        "install-all": "npm run install-client && npm run install-server",
+        "build-client": "cd client && npm run build",
+        "start": "cd server && node server.js",
+        "render-build": "npm run install-all && npm run build-client"
+    }
+}

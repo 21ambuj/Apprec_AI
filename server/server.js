@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const path = require('path');
 
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -21,7 +22,9 @@ app.use(cors({
 }));
 
 // 2. Security Middleware
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false, // Disable CSP for easier deployment of Pollinations/Vite components
+}));
 app.use(cookieParser());
 
 const limiter = rateLimit({
@@ -60,8 +63,8 @@ const applicationRoutes = require('./routes/applicationRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
 const interviewRoutes = require('./routes/interviewRoutes');
 const messageRoutes = require('./routes/messageRoutes');
-const adminRoutes = require('./routes/adminRoutes'); // New Admin Routes
-const practiceRoutes = require('./routes/practiceRoutes'); // New Practice Routes
+const adminRoutes = require('./routes/adminRoutes');
+const practiceRoutes = require('./routes/practiceRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -70,12 +73,21 @@ app.use('/api/applications', applicationRoutes);
 app.use('/api/resume', resumeRoutes);
 app.use('/api/interview', interviewRoutes);
 app.use('/api/messages', messageRoutes);
-app.use('/api/admin', adminRoutes); // Hook up Admin Routes
-app.use('/api/practice', practiceRoutes); // Hook up Practice Routes
+app.use('/api/admin', adminRoutes);
+app.use('/api/practice', practiceRoutes);
 
-app.get('/', (req, res) => {
-    res.send('API is running...');
-});
+// Serving static files in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('API is running...');
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 
