@@ -169,8 +169,8 @@ const RecruiterDashboard = () => {
             <div className="bg-slate-900 pt-16 pb-32">
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-                        <div>
-                            <h1 className="text-4xl font-extrabold text-white mb-2">Recruiter Center</h1>
+                        <div className="flex-1">
+                            <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Recruiter Center</h1>
                             <p className="text-slate-400 text-lg flex items-center gap-2">
                                 <Building2 size={18} /> {user?.companyProfile?.companyName || 'Set up your company profile'}
                                 {user?.companyProfile?.companyName && <button onClick={() => setShowProfileModal(true)} className="text-blue-400 text-sm hover:underline ml-2">(Edit)</button>}
@@ -181,7 +181,7 @@ const RecruiterDashboard = () => {
                                 </p>
                             )}
                         </div>
-                        <Link to="/post-job" className="group flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30 transition-all active:scale-95">
+                        <Link to="/post-job" className="w-full sm:w-auto group flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30 transition-all active:scale-95">
                             <Plus size={20} className="group-hover:rotate-90 transition-transform" /> Post New Job
                         </Link>
                     </div>
@@ -203,7 +203,7 @@ const RecruiterDashboard = () => {
                 )}
 
                 {/* Stats Row */}
-                <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <motion.div variants={itemVariants} className="bg-white rounded-2xl p-6 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-6">
                         <div className="w-14 h-14 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
                             <Briefcase size={28} />
@@ -224,7 +224,7 @@ const RecruiterDashboard = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div variants={itemVariants} className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 shadow-xl shadow-blue-900/20 text-white flex flex-col justify-center relative overflow-hidden">
+                    <motion.div variants={itemVariants} className="sm:col-span-2 lg:col-span-1 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 shadow-xl shadow-blue-900/20 text-white flex flex-col justify-center relative overflow-hidden">
                         <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
                         <h3 className="text-xl font-bold mb-2 flex items-center gap-2"><CheckCircle2 size={20} /> Pro Tip</h3>
                         <p className="text-blue-100 text-sm leading-relaxed">Jobs with a complete company profile receive 40% more applications.</p>
@@ -232,18 +232,18 @@ const RecruiterDashboard = () => {
                 </motion.div>
 
                 {/* Job Listings Filters */}
-                <div className="flex items-center gap-6 border-b border-slate-200 mb-8 mt-4">
+                <div className="flex items-center gap-4 sm:gap-6 border-b border-slate-200 mb-8 mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
                     <button
                         onClick={() => setActiveTab('active')}
-                        className={`text-lg font-bold pb-3 border-b-2 transition-colors ${activeTab === 'active' ? 'text-blue-600 border-blue-600' : 'text-slate-500 border-transparent hover:text-slate-700'}`}
+                        className={`text-base sm:text-lg font-bold pb-3 border-b-2 transition-colors ${activeTab === 'active' ? 'text-blue-600 border-blue-600' : 'text-slate-500 border-transparent hover:text-slate-700'}`}
                     >
-                        Active Postings <span className="ml-2 text-sm bg-slate-100 text-slate-600 py-0.5 px-2 rounded-full">{activeJobsList.length}</span>
+                        Active <span className="hidden sm:inline">Postings</span> <span className="ml-1 sm:ml-2 text-xs bg-slate-100 text-slate-600 py-0.5 px-2 rounded-full">{activeJobsList.length}</span>
                     </button>
                     <button
                         onClick={() => setActiveTab('past')}
-                        className={`text-lg font-bold pb-3 border-b-2 transition-colors ${activeTab === 'past' ? 'text-slate-800 border-slate-800' : 'text-slate-500 border-transparent hover:text-slate-700'}`}
+                        className={`text-base sm:text-lg font-bold pb-3 border-b-2 transition-colors ${activeTab === 'past' ? 'text-slate-800 border-slate-800' : 'text-slate-500 border-transparent hover:text-slate-700'}`}
                     >
-                        Past Jobs <span className="ml-2 text-sm bg-slate-100 text-slate-600 py-0.5 px-2 rounded-full">{pastJobsList.length}</span>
+                        Past <span className="hidden sm:inline">Jobs</span> <span className="ml-1 sm:ml-2 text-xs bg-slate-100 text-slate-600 py-0.5 px-2 rounded-full">{pastJobsList.length}</span>
                     </button>
                 </div>
 
@@ -483,7 +483,7 @@ const RecruiterDashboard = () => {
                                 ) : (
                                     <div className="space-y-4">
                                         {bestMatches.map((match, idx) => (
-                                            <div key={match._id} className="bg-white dark:bg-gray-700 p-5 rounded-2xl border border-slate-200 dark:border-gray-600 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row gap-6 relative">
+                                            <div key={match._id} className="bg-white dark:bg-gray-700 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-gray-600 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row gap-4 sm:gap-6 relative">
                                                 {idx === 0 && <div className={`absolute top-0 right-0 ${matchType === 'applied' ? 'bg-yellow-400 text-yellow-900' : 'bg-pink-500 text-white'} text-[10px] font-black px-3 py-1 rounded-bl-lg uppercase tracking-wider`}>{matchType === 'applied' ? 'Top Match' : 'High Potential'}</div>}
 
                                                 <div className="flex flex-col items-center justify-center shrink-0 border-r border-slate-100 dark:border-gray-600 pr-6">

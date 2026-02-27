@@ -105,12 +105,9 @@ const Dashboard = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
-            {/* Sidebar */}
-            <aside className="w-64 bg-white dark:bg-gray-800 shadow border-r border-gray-100 dark:border-gray-700 hidden md:flex flex-col h-screen sticky top-0">
-                <div className="pt-6">
-                    {/* Apprec AI title removed from here as it's in the header */}
-                </div>
-                <div className="px-6 py-4 flex items-center gap-3 mb-4">
+            {/* Sidebar (Desktop only) */}
+            <aside className="w-64 bg-white dark:bg-gray-800 shadow border-r border-gray-100 dark:border-gray-700 hidden lg:flex flex-col h-screen sticky top-0 shrink-0">
+                <div className="px-6 py-6 flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-xl">
                         {user.name.charAt(0)}
                     </div>
@@ -130,10 +127,10 @@ const Dashboard = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-8 md:p-12 overflow-y-auto w-full">
-                <header className="mb-10">
-                    <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">Welcome back, {user.name.split(' ')[0]}!</h1>
-                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-lg">Here is what is happening with your job search today.</p>
+            <main className="flex-1 p-4 sm:p-8 md:p-12 overflow-y-auto w-full">
+                <header className="mb-10 pt-2 md:pt-0 text-center md:text-left">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight px-2">Welcome back, {user.name.split(' ')[0]}!</h1>
+                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-base sm:text-lg">Here is what is happening with your job search today.</p>
                 </header>
 
                 {/* Error Banner */}
@@ -169,11 +166,11 @@ const Dashboard = () => {
                                 </div>
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden divide-y divide-gray-100">
                                     {myApplications.slice(0, 3).map(app => (
-                                        <div key={app._id} className="p-6 hover:bg-gray-50 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <div key={app._id} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                             <div>
                                                 <h3 className="font-bold text-lg text-gray-900">{app.jobId?.title || 'Unknown Job'}</h3>
                                                 <p className="text-blue-600 font-medium">{app.jobId?.company || 'Unknown Company'}</p>
-                                                <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-500 items-center">
+                                                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2 text-sm text-gray-500 items-center">
                                                     <span className="flex items-center gap-1"><Clock size={14} /> Applied on {new Date(app.appliedAt || app.createdAt).toLocaleDateString()}</span>
                                                     {app.status === 'hired' ? (
                                                         <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 border border-emerald-200 shadow-sm animate-pulse">
@@ -190,7 +187,7 @@ const Dashboard = () => {
                                             </div>
                                             <button
                                                 onClick={() => setSelectedJob(app.jobId)}
-                                                className="px-6 py-2 bg-white border border-gray-200 text-gray-600 font-bold rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
+                                                className="w-full sm:w-auto px-6 py-2 bg-white border border-gray-200 text-gray-600 font-bold rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
                                             >
                                                 View Job
                                             </button>
@@ -208,7 +205,7 @@ const Dashboard = () => {
                                 </div>
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden divide-y divide-gray-100">
                                     {savedJobs.slice(0, 3).map(job => (
-                                        <div key={job._id || job} className="p-6 hover:bg-gray-50 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <div key={job._id || job} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                             <div>
                                                 <h3 className="font-bold text-lg text-gray-900">{job.title || 'Unknown Job'}</h3>
                                                 <p className="text-blue-600 font-medium">{job.company || 'Unknown Company'}</p>
@@ -218,7 +215,7 @@ const Dashboard = () => {
                                             </div>
                                             <button
                                                 onClick={() => setSelectedJob(job)}
-                                                className="px-6 py-2 bg-blue-50 border border-blue-200 text-blue-700 font-bold rounded-lg hover:bg-blue-100 transition-colors whitespace-nowrap"
+                                                className="w-full sm:w-auto px-6 py-2 bg-blue-50 border border-blue-200 text-blue-700 font-bold rounded-lg hover:bg-blue-100 transition-colors whitespace-nowrap"
                                             >
                                                 View Details
                                             </button>
@@ -255,7 +252,7 @@ const Dashboard = () => {
                                             </div>
                                             <button
                                                 onClick={() => setSelectedJob(job)}
-                                                className="px-6 py-2 bg-white border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
+                                                className="w-full sm:w-auto px-6 py-2 bg-white border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
                                             >
                                                 View Details
                                             </button>

@@ -36,12 +36,12 @@ const Landing = () => {
                             ✨ Revolutionizing the Job Search
                         </motion.div>
 
-                        <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-8 tracking-tight">
+                        <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 mb-8 tracking-tight px-4 sm:px-0">
                             Find the Perfect Job with <br className="hidden md:block" />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Apprec AI</span>
                         </motion.h1>
 
-                        <motion.p variants={fadeInUp} className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                        <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
                             Stop getting lost in the resume black hole. Our AI-powered platform matches your true potential with the right opportunities, instantly.
                         </motion.p>
 
@@ -125,12 +125,12 @@ const Landing = () => {
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                         variants={staggerContainer}
-                        className="flex flex-col md:flex-row justify-center items-center gap-12 lg:gap-8 max-w-5xl mx-auto"
+                        className="flex flex-col md:flex-row justify-center items-stretch md:items-start gap-12 lg:gap-8 max-w-5xl mx-auto px-4"
                     >
                         <Step number="1" title="Create Profile" description="Sign up in seconds and securely upload your resume." />
-                        <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 mx-4"></div>
+                        <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 mx-4 mt-12"></div>
                         <Step number="2" title="Get Matched" description="Our AI instantly finds the best job matches for your skills." />
-                        <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 mx-4"></div>
+                        <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-slate-800 via-slate-500 to-slate-800 mx-4 mt-12"></div>
                         <Step number="3" title="Apply & Hired" description="Apply with one click and seamlessly track your status." />
                     </motion.div>
                 </div>
@@ -146,8 +146,8 @@ const Landing = () => {
                     variants={fadeInUp}
                     className="max-w-3xl mx-auto relative z-10"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Ready to Accelerate Your Career?</h2>
-                    <Link to="/signup" className="inline-flex items-center justify-center gap-3 bg-white text-blue-600 px-10 py-5 rounded-full font-bold text-xl hover:bg-slate-50 hover:shadow-2xl hover:shadow-blue-900/50 transition-all active:scale-95">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Ready to Accelerate Your Career?</h2>
+                    <Link to="/signup" className="inline-flex items-center justify-center gap-3 bg-white text-blue-600 px-8 py-4 sm:px-10 sm:py-5 rounded-full font-bold text-lg sm:text-xl hover:bg-slate-50 hover:shadow-2xl hover:shadow-blue-900/50 transition-all active:scale-95">
                         <Briefcase size={24} className="text-blue-500" />
                         Create Your Free Account
                     </Link>

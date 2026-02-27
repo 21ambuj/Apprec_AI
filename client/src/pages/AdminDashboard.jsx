@@ -93,8 +93,8 @@ const AdminDashboard = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row font-sans">
-            {/* Admin Sidebar */}
-            <div className="w-full md:w-64 bg-slate-900 text-slate-300 md:min-h-screen shrink-0 pb-10 flex flex-col">
+            {/* Admin Sidebar - Hidden on mobile, shown on md and up */}
+            <div className="hidden md:flex w-64 bg-slate-900 text-slate-300 min-h-screen shrink-0 pb-10 flex-col">
                 <div className="p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3 text-white mb-2">
                         <div className="p-2 bg-indigo-500 rounded-lg"><Shield size={24} /></div>
@@ -107,7 +107,6 @@ const AdminDashboard = () => {
                         <div className="flex items-center gap-3 px-4 py-3 bg-indigo-500/10 text-indigo-400 rounded-xl">
                             <Users size={18} /> Manage Users
                         </div>
-                        {/* More admin features could go here */}
                     </div>
                 </div>
 
@@ -118,29 +117,40 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
+            {/* Mobile Header - Visible only on small screens */}
+            <div className="md:hidden bg-slate-900 text-white p-4 flex justify-between items-center shadow-md">
+                <div className="flex items-center gap-2">
+                    <Shield size={20} className="text-indigo-400" />
+                    <span className="font-bold tracking-tight">Admin Portal</span>
+                </div>
+                <button onClick={logout} className="p-2 text-slate-400 hover:text-white">
+                    <LogOut size={20} />
+                </button>
+            </div>
+
             {/* Main Content */}
             <div className="flex-1 p-6 md:p-10 overflow-y-auto w-full">
 
                 {/* Stats Row */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-                    <StatCard title="Total Users" value={totalUsers} icon={<Users />} color="blue" />
-                    <StatCard title="Active Jobs" value={totalJobs} icon={<Briefcase />} color="indigo" />
-                    <StatCard title="Applications" value={totalApps} icon={<FileText />} color="emerald" />
-                    <StatCard title="Blocked Accounts" value={blockedCount} icon={<Ban />} color="red" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                    <StatCard title="Total Users" value={totalUsers} icon={<Users size={20} />} color="blue" />
+                    <StatCard title="Active Jobs" value={totalJobs} icon={<Briefcase size={20} />} color="indigo" />
+                    <StatCard title="Applications" value={totalApps} icon={<FileText size={20} />} color="emerald" />
+                    <StatCard title="Blocked Accounts" value={blockedCount} icon={<Ban size={20} />} color="red" />
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col h-[calc(100vh-220px)] min-h-[500px]">
-                    <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-white z-10">
+                    <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-white">
                         <div className="flex gap-4">
                             <button
                                 onClick={() => setActiveTab('candidates')}
-                                className={`text-lg font-bold pb-2 border-b-2 px-1 transition-colors ${activeTab === 'candidates' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                                className={`text-base md:text-lg font-bold pb-2 border-b-2 px-1 transition-colors ${activeTab === 'candidates' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
                             >
                                 Candidates ({candidates.length})
                             </button>
                             <button
                                 onClick={() => setActiveTab('recruiters')}
-                                className={`text-lg font-bold pb-2 border-b-2 px-1 transition-colors ${activeTab === 'recruiters' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                                className={`text-base md:text-lg font-bold pb-2 border-b-2 px-1 transition-colors ${activeTab === 'recruiters' ? 'border-indigo-600 text-indigo-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
                             >
                                 Recruiters ({recruiters.length})
                             </button>
@@ -158,89 +168,94 @@ const AdminDashboard = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-auto bg-slate-50/50">
+                    <div className="flex-1 overflow-x-auto bg-slate-50/50">
                         {loading ? (
-                            <div className="h-full flex items-center justify-center text-slate-400">Loading directory...</div>
+                            <div className="h-full flex items-center justify-center p-10 text-slate-400 font-medium">Loading directory...</div>
                         ) : displayList.length === 0 ? (
-                            <div className="h-full flex items-center justify-center text-slate-400">No users found matching your criteria.</div>
+                            <div className="h-full flex items-center justify-center p-10 text-slate-400 font-medium">No users found.</div>
                         ) : (
-                            <table className="w-full text-left text-sm whitespace-nowrap">
-                                <thead className="bg-slate-100 text-slate-600 sticky top-0 z-10 shadow-sm shadow-slate-200/50">
-                                    <tr>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">User Name & Email</th>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Unique ID</th>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Stats</th>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Status</th>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Vetting</th>
-                                        <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs text-right">Admin Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-slate-100">
-                                    {displayList.map((u) => (
-                                        <tr key={u._id} className="hover:bg-white transition-colors">
-                                            <td className="px-6 py-4 max-w-[200px] truncate">
-                                                <div className="font-bold text-slate-800">{u.name}</div>
-                                                <div className="text-slate-500 text-xs truncate">{u.email}</div>
-                                            </td>
-                                            <td className="px-6 py-4 font-mono font-medium text-slate-600">
-                                                {activeTab === 'candidates' ? (u.candidateCode || 'N/A') : (u.recruiterCode || 'N/A')}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {activeTab === 'candidates' ? (
-                                                    <span className="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded border border-emerald-200 text-xs">
-                                                        {u.stats?.applicationsMade || 0} Apps
-                                                    </span>
-                                                ) : (
-                                                    <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded border border-blue-200 text-xs">
-                                                        {u.stats?.jobsPosted || 0} Jobs
-                                                    </span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {u.isBlocked ? (
-                                                    <span className="text-red-600 flex items-center gap-1 font-semibold text-xs"><Ban size={14} /> Blocked</span>
-                                                ) : (
-                                                    <span className="text-emerald-600 flex items-center gap-1 font-semibold text-xs"><CheckCircle size={14} /> Active</span>
-                                                )}
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                {activeTab === 'recruiters' && (
-                                                    u.isVerified ? (
-                                                        <span className="text-blue-600 flex items-center gap-1 font-bold text-xs bg-blue-50 px-2 py-1 rounded border border-blue-100">
-                                                            <CheckCircle size={14} fill="currentColor" className="text-white" /> Verified
+                            <div className="min-w-full inline-block align-middle">
+                                <table className="min-w-full text-left text-sm whitespace-nowrap">
+                                    <thead className="bg-slate-100 text-slate-600 sticky top-0 z-10 shadow-sm shadow-slate-200/50">
+                                        <tr>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">User Name & Email</th>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Unique ID</th>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Stats</th>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Status</th>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs">Vetting</th>
+                                            <th className="px-6 py-4 font-semibold uppercase tracking-wider text-xs text-right">Admin Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100">
+                                        {displayList.map((u) => (
+                                            <tr key={u._id} className="hover:bg-white transition-colors border-b border-slate-100/50">
+                                                <td className="px-6 py-4">
+                                                    <div className="font-bold text-slate-800 text-sm">{u.name}</div>
+                                                    <div className="text-slate-500 text-xs">{u.email}</div>
+                                                </td>
+                                                <td className="px-6 py-4 font-mono text-xs font-semibold text-slate-600 bg-slate-100/30 rounded">
+                                                    {activeTab === 'candidates' ? (u.candidateCode || 'N/A') : (u.recruiterCode || 'N/A')}
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {activeTab === 'candidates' ? (
+                                                        <span className="bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded text-[10px] uppercase border border-emerald-100">
+                                                            {u.stats?.applicationsMade || 0} Apps
                                                         </span>
                                                     ) : (
-                                                        <span className="text-slate-400 font-medium text-xs">Unverified</span>
-                                                    )
-                                                )}
-                                                {activeTab === 'candidates' && <span className="text-slate-300">--</span>}
-                                            </td>
-                                            <td className="px-6 py-4 text-right space-x-2">
-                                                {activeTab === 'recruiters' && (
-                                                    <button
-                                                        onClick={() => handleToggleVerify(u._id, u.isVerified)}
-                                                        className={`px-3 py-1.5 rounded font-bold text-xs border transition-colors ${u.isVerified ? 'bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100' : 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-200'}`}
-                                                    >
-                                                        {u.isVerified ? 'Remove Check' : 'Verify Recruiter'}
-                                                    </button>
-                                                )}
-                                                <button
-                                                    onClick={() => handleToggleBlock(u._id, u.isBlocked)}
-                                                    className={`px-3 py-1.5 rounded font-bold text-xs border transition-colors ${u.isBlocked ? 'bg-slate-800 text-white border-slate-800 hover:bg-slate-700' : 'bg-amber-50 text-amber-600 border-amber-200 hover:bg-amber-100'}`}
-                                                >
-                                                    {u.isBlocked ? 'Unblock' : 'Block'}
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDeleteUser(u._id)}
-                                                    className="px-3 py-1.5 rounded font-bold text-xs border border-red-200 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-colors"
-                                                >
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                                        <span className="bg-blue-50 text-blue-700 font-bold px-2.5 py-1 rounded text-[10px] uppercase border border-blue-100">
+                                                            {u.stats?.jobsPosted || 0} Jobs
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {u.isBlocked ? (
+                                                        <span className="text-red-600 flex items-center gap-1 font-bold text-[10px] uppercase"><Ban size={12} /> Blocked</span>
+                                                    ) : (
+                                                        <span className="text-emerald-600 flex items-center gap-1 font-bold text-[10px] uppercase"><CheckCircle size={12} /> Active</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    {activeTab === 'recruiters' && (
+                                                        u.isVerified ? (
+                                                            <span className="text-blue-600 flex items-center gap-1 font-bold text-[10px] bg-blue-50 px-2 py-1 rounded border border-blue-100 uppercase">
+                                                                <CheckCircle size={12} fill="currentColor" className="text-white" /> Verified
+                                                            </span>
+                                                        ) : (
+                                                            <span className="text-slate-400 font-bold text-[10px] uppercase">Unverified</span>
+                                                        )
+                                                    )}
+                                                    {activeTab === 'candidates' && <span className="text-slate-300">--</span>}
+                                                </td>
+                                                <td className="px-6 py-4 text-right">
+                                                    <div className="flex items-center justify-end gap-2">
+                                                        {activeTab === 'recruiters' && (
+                                                            <button
+                                                                onClick={() => handleToggleVerify(u._id, u.isVerified)}
+                                                                className={`px-3 py-1.5 rounded-lg font-bold text-[10px] uppercase transition-all ${u.isVerified ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'}`}
+                                                            >
+                                                                {u.isVerified ? 'Undo' : 'Verify'}
+                                                            </button>
+                                                        )}
+                                                        <button
+                                                            onClick={() => handleToggleBlock(u._id, u.isBlocked)}
+                                                            className={`px-3 py-1.5 rounded-lg font-bold text-[10px] uppercase transition-all ${u.isBlocked ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-amber-100 text-amber-600 hover:bg-amber-200'}`}
+                                                        >
+                                                            {u.isBlocked ? 'Unblock' : 'Block'}
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleDeleteUser(u._id)}
+                                                            className="p-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100"
+                                                            title="Delete User"
+                                                        >
+                                                            <Trash2 size={14} />
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </div>
                 </div>

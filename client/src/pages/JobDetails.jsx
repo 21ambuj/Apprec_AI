@@ -103,29 +103,29 @@ const JobDetails = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 py-10">
-            <div className="container mx-auto px-6 max-w-4xl">
+            <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     {/* Header */}
-                    <div className="bg-blue-600 p-8 text-white">
-                        <h1 className="text-3xl font-bold mb-2">{job.title}</h1>
-                        <div className="flex flex-wrap gap-4 text-blue-100">
+                    <div className="bg-blue-600 p-6 sm:p-8 text-white">
+                        <h1 className="text-2xl sm:text-3xl font-bold mb-3">{job.title}</h1>
+                        <div className="flex flex-wrap gap-x-4 gap-y-2 text-blue-100 text-sm sm:text-base">
                             <span className="flex items-center gap-1">
-                                <Building size={18} /> {job.company}
+                                <Building size={16} /> {job.company}
                                 {job.recruiterId?.isVerified && (
-                                    <CheckCircle size={16} className="text-white fill-blue-500" title="Verified Recruiter" />
+                                    <CheckCircle size={14} className="text-white fill-blue-500" title="Verified Recruiter" />
                                 )}
                             </span>
-                            <span className="flex items-center gap-1"><MapPin size={18} /> {job.location}</span>
-                            <span className="flex items-center gap-1"><Briefcase size={18} /> {job.type}</span>
+                            <span className="flex items-center gap-1"><MapPin size={16} /> {job.location}</span>
+                            <span className="flex items-center gap-1"><Briefcase size={16} /> {job.type}</span>
                             {job.applicationDeadline && (
                                 <span className="flex items-center gap-1 text-amber-200">
-                                    <Clock size={18} /> Closes: {new Date(job.applicationDeadline).toLocaleDateString()}
+                                    <Clock size={16} /> Closes: {new Date(job.applicationDeadline).toLocaleDateString()}
                                 </span>
                             )}
                         </div>
                     </div>
 
-                    <div className="p-8">
+                    <div className="p-6 sm:p-8">
                         {/* Job Description */}
                         <div className="mb-8">
                             <h2 className="text-xl font-bold text-gray-800 mb-4">Job Description</h2>
@@ -159,7 +159,7 @@ const JobDetails = () => {
 
                         {/* About Company Section */}
                         {(job.recruiterId?.companyProfile?.description || job.recruiterId?.companyProfile?.website) && (
-                            <div className="mb-8 bg-slate-50 border border-slate-100 p-8 rounded-2xl">
+                            <div className="mb-8 bg-slate-50 border border-slate-100 p-6 sm:p-8 rounded-2xl">
                                 <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                                     <Info className="text-blue-600" size={22} /> About {job.recruiterId?.companyProfile?.companyName || job.company}
                                 </h2>
@@ -170,7 +170,7 @@ const JobDetails = () => {
                                     </p>
                                 )}
 
-                                <div className="flex flex-wrap gap-6 text-sm">
+                                <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 text-sm">
                                     {job.recruiterId?.companyProfile?.website && (
                                         <div className="flex items-center gap-2 text-blue-600 font-semibold">
                                             <Globe size={18} />
@@ -182,13 +182,13 @@ const JobDetails = () => {
                                     {job.recruiterId?.companyProfile?.industry && (
                                         <div className="flex items-center gap-2 text-slate-500">
                                             <Building size={18} />
-                                            <span>Industry: {job.recruiterId.companyProfile.industry}</span>
+                                            <span className="line-clamp-1">Industry: {job.recruiterId.companyProfile.industry}</span>
                                         </div>
                                     )}
                                     {(job.recruiterId?.companyProfile?.location || job.location) && (
                                         <div className="flex items-center gap-2 text-slate-500">
                                             <MapPin size={18} />
-                                            <span>HQ: {job.recruiterId?.companyProfile?.location || job.location}</span>
+                                            <span className="line-clamp-1">HQ: {job.recruiterId?.companyProfile?.location || job.location}</span>
                                         </div>
                                     )}
                                 </div>
@@ -220,43 +220,46 @@ const JobDetails = () => {
                                     <p className="text-gray-600 mb-4">
                                         Your profile details and uploaded resume will be submitted to the recruiter.
                                     </p>
-                                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                        <button
-                                            onClick={async () => {
-                                                try {
-                                                    // Initialize a conversation then go to chat
-                                                    await api.post(`/messages/send/${job.recruiterId._id || job.recruiterId}`, { message: 'Hi, I am interested in this job!' });
-                                                    navigate('/chat');
-                                                } catch (err) {
-                                                    console.error(err);
-                                                    navigate('/chat');
-                                                }
-                                            }}
-                                            className="bg-white border-2 border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2"
-                                        >
-                                            <MessageCircle size={20} /> Chat with Recruiter
-                                        </button>
-                                        <button
-                                            onClick={() => navigate(`/jobs/${id}/interview`)}
-                                            className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md shadow-indigo-200 flex items-center justify-center gap-2 flex-1"
-                                        >
-                                            <Sparkles size={20} /> Practice Interview
-                                        </button>
-                                        <button
-                                            onClick={handleToggleSave}
-                                            disabled={saving}
-                                            className={`border-2 border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 transition-colors flex max-w-[160px] items-center justify-center gap-2 ${isSaved ? 'text-indigo-600 border-indigo-200 bg-indigo-50' : ''}`}
-                                        >
-                                            <Bookmark size={20} className={isSaved ? "fill-current" : ""} />
-                                            {isSaved ? 'Saved' : 'Save'}
-                                        </button>
-                                        <button
-                                            onClick={handleApply}
-                                            disabled={applying || message.includes('success') || hasApplied}
-                                            className={`bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors flex-1 ${(applying || hasApplied || message.includes('success')) ? 'opacity-70 cursor-not-allowed' : ''}`}
-                                        >
-                                            {applying ? 'Submitting...' : (hasApplied ? 'Applied ✓' : 'Apply Now')}
-                                        </button>
+                                    <div className="flex flex-col gap-4">
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <button
+                                                onClick={async () => {
+                                                    try {
+                                                        await api.post(`/messages/send/${job.recruiterId._id || job.recruiterId}`, { message: 'Hi, I am interested in this job!' });
+                                                        navigate('/chat');
+                                                    } catch (err) {
+                                                        console.error(err);
+                                                        navigate('/chat');
+                                                    }
+                                                }}
+                                                className="bg-white border-2 border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2 flex-1"
+                                            >
+                                                <MessageCircle size={20} /> <span className="sm:hidden lg:inline">Message</span> Recruiter
+                                            </button>
+                                            <button
+                                                onClick={() => navigate(`/jobs/${id}/interview`)}
+                                                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md shadow-indigo-200 flex items-center justify-center gap-2 flex-1"
+                                            >
+                                                <Sparkles size={20} /> Mock Interview
+                                            </button>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <button
+                                                onClick={handleToggleSave}
+                                                disabled={saving}
+                                                className={`border-2 border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-bold hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 sm:max-w-[150px] flex-1 ${isSaved ? 'text-indigo-600 border-indigo-200 bg-indigo-50' : ''}`}
+                                            >
+                                                <Bookmark size={20} className={isSaved ? "fill-current" : ""} />
+                                                {isSaved ? 'Saved' : 'Save'}
+                                            </button>
+                                            <button
+                                                onClick={handleApply}
+                                                disabled={applying || message.includes('success') || hasApplied}
+                                                className={`bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors flex-1 ${(applying || hasApplied || message.includes('success')) ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                            >
+                                                {applying ? 'Submitting...' : (hasApplied ? 'Applied ✓' : 'Apply Now')}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )}

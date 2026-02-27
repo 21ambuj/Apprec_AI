@@ -229,30 +229,30 @@ const Profile = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 mb-6 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-10"></div>
 
-                    <div className="relative flex flex-col md:flex-row items-center gap-8 mt-4">
-                        <div className="w-32 h-32 bg-white dark:bg-gray-700 p-1 rounded-full shadow-md">
+                    <div className="relative flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mt-4">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 bg-white dark:bg-gray-700 p-1 rounded-full shadow-md shrink-0">
                             <div className="w-full h-full bg-gray-200 dark:bg-gray-600 rounded-full flex items-center justify-center overflow-hidden">
                                 {user?.profilePicture ? (
                                     <img src={user.profilePicture} alt="Profile" className="w-full h-full object-cover" />
                                 ) : (
-                                    <User size={64} className="text-gray-400" />
+                                    <User size={48} className="text-gray-400" />
                                 )}
                             </div>
                         </div>
 
                         <div className="flex-1 text-center md:text-left">
-                            <div className="flex items-center gap-3 justify-center md:justify-start">
-                                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{user?.name}</h1>
+                            <div className="flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
+                                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">{user?.name}</h1>
                                 {user?.role === 'candidate' && user?.candidateCode && (
-                                    <span className="text-xs font-mono font-bold bg-indigo-100 text-indigo-700 px-2 py-1 rounded border border-indigo-200" title="Unique Applicant ID">
+                                    <span className="text-[10px] font-mono font-bold bg-indigo-100 text-indigo-700 px-2 py-1 rounded border border-indigo-200" title="Unique Applicant ID">
                                         ID: {user.candidateCode}
                                     </span>
                                 )}
                             </div>
-                            <p className="text-gray-500 font-medium">{user?.profile?.experience?.[0]?.title || 'Job Seeker'}</p>
+                            <p className="text-gray-500 font-medium text-sm sm:text-base">{user?.profile?.experience?.[0]?.title || 'Job Seeker'}</p>
 
-                            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-sm text-gray-600">
-                                <span className="flex items-center gap-1"><Mail size={16} /> {user?.email}</span>
+                            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 mt-4 text-sm text-gray-600">
+                                <span className="flex items-center gap-1"><Mail size={16} /> <span className="truncate max-w-[200px]">{user?.email}</span></span>
                                 {user?.phone && <span className="flex items-center gap-1"><Phone size={16} /> {user.phone}</span>}
                                 {user?.address && <span className="flex items-center gap-1"><MapPin size={16} /> {user.address}</span>}
                             </div>
@@ -260,10 +260,10 @@ const Profile = () => {
 
                         <button
                             onClick={() => setIsEditing(!isEditing)}
-                            className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center gap-2 shadow-sm"
+                            className="w-full md:w-auto bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 flex items-center justify-center gap-2 shadow-sm"
                         >
                             {isEditing ? <X size={18} /> : <Edit size={18} />}
-                            {isEditing ? 'Cancel' : 'Edit Profile'}
+                            {isEditing ? 'Cancel Edit' : 'Edit Profile'}
                         </button>
                     </div>
                 </div>
@@ -370,7 +370,7 @@ const Profile = () => {
                                 </div>
 
                                 <h4 className="font-bold text-gray-800 mb-3 mt-6 border-t pt-4">Social Links</h4>
-                                <div className="grid md:grid-cols-3 gap-4 mb-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL</label>
                                         <input type="text" name="socialLinks.linkedin" value={formData.socialLinks?.linkedin || ''} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://linkedin.com/in/..." />
@@ -399,7 +399,7 @@ const Profile = () => {
                                         </h4>
                                         <div className="space-y-4 mb-6">
                                             {formData.profile?.experience?.map((exp, index) => (
-                                                <div key={index} className="grid md:grid-cols-3 gap-4 p-4 border border-blue-100 bg-gray-50 rounded-lg relative group">
+                                                <div key={index} className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 border border-blue-100 bg-gray-50 rounded-lg relative group">
                                                     <button type="button" onClick={() => removeArrayItem('experience', index)} className="absolute -top-3 -right-3 bg-white text-red-500 border border-red-200 shadow-sm rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"><X size={16} /></button>
                                                     <div>
                                                         <label className="block text-xs font-medium text-gray-500 mb-1">Job Title</label>
@@ -424,7 +424,7 @@ const Profile = () => {
                                         </h4>
                                         <div className="space-y-4 mb-6">
                                             {formData.profile?.education?.map((edu, index) => (
-                                                <div key={index} className="grid md:grid-cols-3 gap-4 p-4 border border-green-100 bg-gray-50 rounded-lg relative group">
+                                                <div key={index} className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 border border-green-100 bg-gray-50 rounded-lg relative group">
                                                     <button type="button" onClick={() => removeArrayItem('education', index)} className="absolute -top-3 -right-3 bg-white text-red-500 border border-red-200 shadow-sm rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"><X size={16} /></button>
                                                     <div>
                                                         <label className="block text-xs font-medium text-gray-500 mb-1">Degree</label>
@@ -445,7 +445,7 @@ const Profile = () => {
                                     </>
                                 )}
 
-                                <div className="flex justify-between items-center mt-6 border-t pt-4">
+                                <div className="flex flex-col sm:flex-row justify-between items-center mt-6 border-t pt-4 gap-4">
                                     <button
                                         type="button"
                                         onClick={async () => {
@@ -459,14 +459,14 @@ const Profile = () => {
                                                 }
                                             }
                                         }}
-                                        className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors border border-transparent hover:border-red-200"
+                                        className="w-full sm:w-auto px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors border border-transparent hover:border-red-200 order-last sm:order-first"
                                     >
                                         Delete Account
                                     </button>
-                                    <div className="flex gap-3">
-                                        <button type="button" onClick={() => setIsEditing(false)} className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg font-medium transition-colors">Cancel</button>
-                                        <button type="submit" disabled={saving} className="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 flex items-center gap-2 shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed">
-                                            {saving ? <><Loader2 size={18} className="animate-spin" /> Saving...</> : <><Save size={18} /> Save Details</>}
+                                    <div className="flex gap-3 w-full sm:w-auto">
+                                        <button type="button" onClick={() => setIsEditing(false)} className="flex-1 sm:flex-none px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg font-medium transition-colors">Cancel</button>
+                                        <button type="submit" disabled={saving} className="flex-1 sm:flex-none bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed">
+                                            {saving ? <><Loader2 size={18} className="animate-spin" /> Saving...</> : <><Save size={18} /> Save</>}
                                         </button>
                                     </div>
                                 </div>

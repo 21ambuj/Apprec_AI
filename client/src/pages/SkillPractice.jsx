@@ -177,53 +177,51 @@ const SkillPractice = () => {
             <div className="container mx-auto px-6">
 
                 {/* Hero Header */}
-                <header className="mb-12 text-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-16 rounded-3xl shadow-lg relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -ml-20 -mt-20"></div>
-                    <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-400 opacity-10 rounded-full blur-3xl -mr-20 -mb-20"></div>
+                <header className="mb-8 md:mb-12 text-center bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-12 md:py-16 rounded-3xl shadow-lg relative overflow-hidden mx-1">
+                    <div className="absolute top-0 left-0 w-48 h-48 md:w-64 md:h-64 bg-white opacity-5 rounded-full blur-3xl -ml-20 -mt-20"></div>
+                    <div className="absolute bottom-0 right-0 w-64 h-64 md:w-80 md:h-80 bg-blue-400 opacity-10 rounded-full blur-3xl -mr-20 -mb-20"></div>
 
-                    <div className="relative z-10 px-4">
-                        <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-2xl mb-6 backdrop-blur-sm border border-white/20">
-                            <Users size={32} className="text-blue-100" />
+                    <div className="relative z-10 px-6">
+                        <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-2xl mb-4 md:mb-6 backdrop-blur-sm border border-white/20">
+                            <Users size={28} className="text-blue-100" />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">Peer-to-Peer Mock Interviews</h1>
-                        <p className="text-blue-100 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
-                            Practice your technical skills with peers at your exact level. Instantly connect via Auto-Match or schedule a future session.
+                        <h1 className="text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 tracking-tight leading-tight">Mock Interviews</h1>
+                        <p className="text-blue-100 max-w-2xl mx-auto text-base md:text-xl leading-relaxed opacity-90">
+                            Practice your technical skills with peers at your level. Connect via Auto-Match or schedule a session.
                         </p>
                     </div>
                 </header>
 
-                {/* Instant Auto-Match Section */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
-                        <Star className="text-amber-500 fill-amber-500" /> Instant Practice Auto-Match
+                <div className="mb-10 px-1">
+                    <h2 className="text-xl md:text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
+                        <Star className="text-amber-500 fill-amber-500" size={20} /> Instant Practice
                     </h2>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {/* Audio Call Card */}
-                        <div className={`p-8 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden ${isSearching && searchType === 'voice' ? 'bg-blue-50 border-blue-400 shadow-xl shadow-blue-100' : 'bg-white border-blue-100 shadow-md hover:border-blue-300 hover:shadow-lg'}`}>
+                        <div className={`p-6 sm:p-8 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden ${isSearching && searchType === 'voice' ? 'bg-blue-50 border-blue-400 shadow-xl shadow-blue-100' : 'bg-white border-blue-100 shadow-md hover:border-blue-300 hover:shadow-lg'}`}>
                             {isSearching && searchType === 'voice' && (
-                                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
-                                    <div className="relative mb-6">
-                                        <div className="w-16 h-16 bg-blue-100 rounded-full animate-ping absolute"></div>
-                                        <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                                            <Phone className="text-white" size={24} />
+                                <div className="absolute inset-0 bg-white/90 backdrop-blur-md z-10 flex flex-col items-center justify-center p-4">
+                                    <div className="relative mb-4">
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full animate-ping absolute"></div>
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
+                                            <Phone className="text-white" size={20} />
                                         </div>
                                     </div>
-                                    <h3 className="text-blue-900 font-bold text-lg mb-2 text-center px-4">Finding best match for you...</h3>
-                                    <button onClick={handleCancelSearch} className="mt-4 px-6 py-2 bg-white border border-red-200 text-red-600 font-bold rounded-lg hover:bg-red-50 transition-colors">
-                                        Cancel Search
+                                    <h3 className="text-blue-900 font-bold text-base sm:text-lg mb-3 text-center">Finding match...</h3>
+                                    <button onClick={handleCancelSearch} className="px-5 py-2 bg-white border border-red-200 text-red-600 text-sm font-bold rounded-xl hover:bg-red-50 transition-colors">
+                                        Cancel
                                     </button>
                                 </div>
                             )}
 
                             {searchTimeoutError === 'voice' && (
-                                <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex flex-col items-center justify-center animate-in fade-in duration-300">
-                                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-600">
-                                        <X size={32} />
+                                <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 animate-in fade-in duration-300">
+                                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-600">
+                                        <X size={24} />
                                     </div>
-                                    <h3 className="text-gray-900 font-bold text-lg mb-2 text-center px-4">No peers online right now</h3>
-                                    <p className="text-gray-500 text-center px-6 mb-6">We couldn't find an available match. Please try again later!</p>
-                                    <button onClick={() => setSearchTimeoutError(false)} className="px-6 py-2 bg-gray-100 text-gray-700 font-bold rounded-lg hover:bg-gray-200 transition-colors">
+                                    <h3 className="text-gray-900 font-bold text-base mb-2 text-center">No peers online</h3>
+                                    <button onClick={() => setSearchTimeoutError(false)} className="px-5 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors">
                                         Dismiss
                                     </button>
                                 </div>
@@ -248,30 +246,29 @@ const SkillPractice = () => {
                         </div>
 
                         {/* Video Call Card */}
-                        <div className={`p-8 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden ${isSearching && searchType === 'video' ? 'bg-indigo-50 border-indigo-400 shadow-xl shadow-indigo-100' : 'bg-white border-indigo-100 shadow-md hover:border-indigo-300 hover:shadow-lg'}`}>
+                        <div className={`p-6 sm:p-8 rounded-2xl border-2 transition-all duration-300 relative overflow-hidden ${isSearching && searchType === 'video' ? 'bg-indigo-50 border-indigo-400 shadow-xl shadow-indigo-100' : 'bg-white border-indigo-100 shadow-md hover:border-indigo-300 hover:shadow-lg'}`}>
                             {isSearching && searchType === 'video' && (
-                                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
-                                    <div className="relative mb-6">
-                                        <div className="w-16 h-16 bg-indigo-100 rounded-full animate-ping absolute"></div>
-                                        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
-                                            <Video className="text-white" size={24} />
+                                <div className="absolute inset-0 bg-white/90 backdrop-blur-md z-10 flex flex-col items-center justify-center p-4">
+                                    <div className="relative mb-4">
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-100 rounded-full animate-ping absolute"></div>
+                                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-600 rounded-full flex items-center justify-center relative z-10 shadow-lg">
+                                            <Video className="text-white" size={20} />
                                         </div>
                                     </div>
-                                    <h3 className="text-indigo-900 font-bold text-lg mb-2 text-center px-4">Finding best match for you...</h3>
-                                    <button onClick={handleCancelSearch} className="mt-4 px-6 py-2 bg-white border border-red-200 text-red-600 font-bold rounded-lg hover:bg-red-50 transition-colors">
-                                        Cancel Search
+                                    <h3 className="text-indigo-900 font-bold text-base sm:text-lg mb-3 text-center">Finding match...</h3>
+                                    <button onClick={handleCancelSearch} className="px-5 py-2 bg-white border border-red-200 text-red-600 text-sm font-bold rounded-xl hover:bg-red-50 transition-colors">
+                                        Cancel
                                     </button>
                                 </div>
                             )}
 
                             {searchTimeoutError === 'video' && (
-                                <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex flex-col items-center justify-center animate-in fade-in duration-300">
-                                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-600">
-                                        <X size={32} />
+                                <div className="absolute inset-0 bg-white/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 animate-in fade-in duration-300">
+                                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-600">
+                                        <X size={24} />
                                     </div>
-                                    <h3 className="text-gray-900 font-bold text-lg mb-2 text-center px-4">No peers online right now</h3>
-                                    <p className="text-gray-500 text-center px-6 mb-6">We couldn't find an available match. Please try again later!</p>
-                                    <button onClick={() => setSearchTimeoutError(false)} className="px-6 py-2 bg-gray-100 text-gray-700 font-bold rounded-lg hover:bg-gray-200 transition-colors">
+                                    <h3 className="text-gray-900 font-bold text-base mb-2 text-center">No peers online</h3>
+                                    <button onClick={() => setSearchTimeoutError(false)} className="px-5 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-xl hover:bg-gray-200 transition-colors">
                                         Dismiss
                                     </button>
                                 </div>
@@ -305,16 +302,16 @@ const SkillPractice = () => {
                         </h2>
                         <div className="grid gap-4">
                             {incomingRequests.filter(r => r.status === 'pending').map((req) => (
-                                <div key={req._id} className="bg-white p-6 rounded-2xl shadow-sm border border-amber-200 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-2 h-full bg-amber-400"></div>
-                                    <div className="flex items-center gap-4 w-full md:w-auto ml-2">
-                                        <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-50 rounded-full flex items-center justify-center text-amber-700 font-extrabold text-xl">
+                                <div key={req._id} className="bg-white p-5 rounded-2xl shadow-sm border border-amber-200 flex flex-col lg:flex-row items-center justify-between gap-5 relative overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-1.5 h-full bg-amber-400"></div>
+                                    <div className="flex items-center gap-4 w-full lg:w-auto">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-50 rounded-full flex items-center justify-center text-amber-700 font-extrabold text-lg">
                                             {req.requesterId.name.charAt(0)}
                                         </div>
-                                        <div>
-                                            <h3 className="font-bold text-lg text-gray-900">{req.requesterId.name}</h3>
-                                            <p className="text-sm text-gray-600 flex items-center gap-2">
-                                                <Calendar size={14} className="text-gray-400" /> {req.scheduledDate} at {req.scheduledTime}
+                                        <div className="flex-1">
+                                            <h3 className="font-bold text-gray-900">{req.requesterId.name}</h3>
+                                            <p className="text-xs text-gray-600 flex items-center gap-1.5 mt-0.5">
+                                                <Calendar size={12} className="text-gray-400" /> {req.scheduledDate} • {req.scheduledTime}
                                             </p>
                                         </div>
                                     </div>
@@ -323,11 +320,11 @@ const SkillPractice = () => {
                                             "{req.message}"
                                         </div>
                                     )}
-                                    <div className="flex items-center gap-3 w-full md:w-auto">
-                                        <button onClick={() => handleRequestAction(req._id, 'accepted')} className="flex-1 md:flex-none px-6 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors">
+                                    <div className="flex items-center gap-2.5 w-full lg:w-auto mt-2 lg:mt-0">
+                                        <button onClick={() => handleRequestAction(req._id, 'accepted')} className="flex-1 lg:flex-none px-5 py-2 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-all text-sm shadow-md">
                                             Accept
                                         </button>
-                                        <button onClick={() => handleRequestAction(req._id, 'rejected')} className="flex-1 md:flex-none px-6 py-2 bg-gray-100 text-gray-700 font-bold rounded-lg hover:bg-gray-200 transition-colors border border-gray-200">
+                                        <button onClick={() => handleRequestAction(req._id, 'rejected')} className="flex-1 lg:flex-none px-5 py-2 bg-gray-50 text-gray-700 font-bold rounded-xl hover:bg-gray-100 transition-all text-sm border border-gray-200">
                                             Decline
                                         </button>
                                     </div>
@@ -343,29 +340,29 @@ const SkillPractice = () => {
                         <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2 border-l-4 border-green-500 pl-3">
                             Upcoming Scheduled Practice
                         </h2>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {[...incomingRequests, ...outgoingRequests].filter(r => r.status === 'accepted').map((req) => {
                                 const isIncoming = req.receiverId === user._id || (typeof req.receiverId === 'object' && req.receiverId._id === user._id);
                                 const peer = isIncoming ? req.requesterId : req.receiverId;
 
                                 return (
-                                    <div key={req._id} className="bg-white p-6 rounded-2xl shadow-sm border border-green-200/50 flex flex-col relative">
-                                        <div className="absolute top-4 right-4 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                                            <CheckCircle size={14} /> Confirmed
+                                    <div key={req._id} className="bg-white p-5 rounded-2xl shadow-sm border border-green-200/50 flex flex-col relative group">
+                                        <div className="absolute top-3 right-3 bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 uppercase tracking-tight">
+                                            <CheckCircle size={10} /> Confirmed
                                         </div>
-                                        <div className="flex items-center gap-4 mb-4">
-                                            <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-700 font-bold text-lg">
+                                        <div className="flex items-center gap-3.5 mb-5">
+                                            <div className="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-700 font-bold text-base">
                                                 {peer.name?.charAt(0)}
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-gray-900">{peer.name}</h3>
-                                                <div className="text-sm font-medium text-blue-600 flex items-center gap-1">
-                                                    <Clock size={14} /> {req.scheduledDate} at {req.scheduledTime}
+                                                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{peer.name}</h3>
+                                                <div className="text-xs font-bold text-blue-600 flex items-center gap-1 mt-0.5">
+                                                    <Clock size={12} /> {req.scheduledDate} • {req.scheduledTime}
                                                 </div>
                                             </div>
                                         </div>
-                                        <button onClick={() => handleChatClick(peer._id)} className="w-full py-2.5 mt-auto bg-green-50 text-green-700 font-bold rounded-xl hover:bg-green-100 border border-green-200 transition-colors flex justify-center items-center gap-2">
-                                            <MessageSquare size={18} /> Open Chat & Connect
+                                        <button onClick={() => handleChatClick(peer._id)} className="w-full py-2.5 mt-auto bg-green-50 text-green-700 font-bold rounded-xl hover:bg-green-100 border border-green-200 transition-all flex justify-center items-center gap-2 text-sm active:scale-95">
+                                            <MessageSquare size={16} /> Open Chat
                                         </button>
                                     </div>
                                 );
@@ -376,7 +373,9 @@ const SkillPractice = () => {
 
                 {/* Match Grid */}
                 <div>
-                    <h2 className="text-2xl font-bold mb-6 text-gray-800">Peer Directory</h2>
+                    <h2 className="text-xl md:text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2 px-1">
+                        <Users className="text-blue-600" size={20} /> Peer Directory
+                    </h2>
                     {loading ? (
                         <div className="text-center py-20 flex flex-col items-center">
                             <Loader2 className="animate-spin text-blue-600 mb-4" size={40} />
@@ -389,64 +388,64 @@ const SkillPractice = () => {
                             <span className="text-sm mt-2 block">Make sure you have uploaded a resume first!</span>
                         </div>
                     ) : matches.length > 0 ? (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                             {matches.map((peer) => {
                                 // Check if an outgoing request is already pending
                                 const hasPendingRequest = outgoingRequests.some(r => r.status === 'pending' && (r.receiverId._id === peer._id || r.receiverId === peer._id));
 
                                 return (
-                                    <div key={peer._id} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 relative overflow-hidden group">
-                                        <div className="absolute top-0 right-0 bg-gradient-to-l from-green-500 to-emerald-500 text-white text-xs px-4 py-1.5 rounded-bl-xl font-bold flex items-center gap-1 shadow-sm">
-                                            <Star size={12} className="fill-current" /> {peer.matchScore}% Skill Match
+                                    <div key={peer._id} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 bg-gradient-to-l from-green-500 to-emerald-500 text-white text-[10px] sm:text-xs px-3 sm:px-4 py-1.5 rounded-bl-xl font-bold flex items-center gap-1 shadow-sm uppercase tracking-wider">
+                                            <Star size={10} className="fill-current" /> {peer.matchScore}% Match
                                         </div>
 
-                                        <div className="flex items-center gap-5 mb-6 mt-2">
-                                            <div className="relative">
-                                                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-50 rounded-full flex items-center justify-center text-blue-700 font-extrabold text-2xl border-2 border-white shadow-sm">
+                                        <div className="flex items-center gap-4 mb-6 mt-4">
+                                            <div className="relative shrink-0">
+                                                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-100 to-indigo-50 rounded-full flex items-center justify-center text-blue-700 font-extrabold text-xl sm:text-2xl border-2 border-white shadow-sm">
                                                     {peer.name.charAt(0)}
                                                 </div>
-                                                <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                                                <div className="absolute bottom-0 right-0 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 border-2 border-white rounded-full"></div>
                                             </div>
-                                            <div>
-                                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{peer.name}</h3>
-                                                <p className="text-gray-500 text-sm flex items-center gap-1.5 font-medium mt-1">
-                                                    <Briefcase size={14} className="text-gray-400" /> {peer.period || peer.profile?.experience?.[0]?.title || 'Software Engineer'}
+                                            <div className="min-w-0">
+                                                <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors truncate">{peer.name}</h3>
+                                                <p className="text-gray-500 text-xs sm:text-sm flex items-center gap-1 font-medium mt-0.5">
+                                                    <Briefcase size={12} className="text-gray-400 shrink-0" /> <span className="truncate">{peer.period || peer.profile?.experience?.[0]?.title || 'Engineer'}</span>
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="mb-8 p-4 bg-gray-50 rounded-xl border border-gray-100/50">
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-1">
-                                                <Award size={14} /> Shared Skills
+                                        <div className="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-100/50">
+                                            <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2.5 flex items-center gap-1">
+                                                <Award size={12} /> Shared Skills
                                             </h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {peer.skills.slice(0, 5).map((skill, index) => (
-                                                    <span key={index} className="bg-white border border-gray-200 text-gray-700 text-xs px-2.5 py-1 rounded-md font-medium shadow-sm">
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {peer.skills.slice(0, 4).map((skill, index) => (
+                                                    <span key={index} className="bg-white border border-gray-200 text-gray-600 text-[10px] sm:text-xs px-2 py-0.5 rounded-lg font-bold shadow-sm">
                                                         {skill}
                                                     </span>
                                                 ))}
-                                                {peer.skills.length > 5 && (
-                                                    <span className="text-xs text-blue-600 font-bold px-2 py-1 bg-blue-50 rounded-md">+{peer.skills.length - 5}</span>
+                                                {peer.skills.length > 4 && (
+                                                    <span className="text-[10px] text-blue-600 font-bold px-2 py-0.5 bg-blue-50 rounded-lg">+{peer.skills.length - 4}</span>
                                                 )}
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-3">
+                                        <div className="flex flex-col gap-2.5">
                                             {hasPendingRequest ? (
-                                                <button disabled className="w-full bg-indigo-50 text-indigo-400 py-3 rounded-xl font-bold border border-indigo-100 flex items-center justify-center gap-2 cursor-not-allowed">
-                                                    <Calendar size={18} /> Request Pending
+                                                <button disabled className="w-full bg-gray-50 text-gray-400 py-3 rounded-xl font-bold border border-gray-200 flex items-center justify-center gap-2 cursor-not-allowed text-sm">
+                                                    <Calendar size={16} /> Request Sent
                                                 </button>
                                             ) : (
                                                 <button
                                                     onClick={() => { setSelectedPeer(peer); setShowModal(true); }}
-                                                    className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                                                    className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm active:scale-95"
                                                 >
-                                                    <Calendar size={18} /> Schedule Session
+                                                    <Calendar size={16} /> Schedule Session
                                                 </button>
                                             )}
 
-                                            <button onClick={() => handleChatClick(peer._id)} className="w-full bg-white text-gray-700 border-2 border-gray-200 py-2.5 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center justify-center gap-2">
-                                                <MessageSquare size={18} /> Send Message
+                                            <button onClick={() => handleChatClick(peer._id)} className="w-full bg-white text-gray-700 border border-gray-200 py-2.5 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center justify-center gap-2 text-sm active:scale-95">
+                                                <MessageSquare size={16} /> Chat
                                             </button>
                                         </div>
                                     </div>
@@ -467,60 +466,60 @@ const SkillPractice = () => {
             {/* Schedule Modal */}
             {showModal && selectedPeer && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+                    <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
                         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white flex justify-between items-center relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-xl"></div>
-                            <div>
-                                <h2 className="text-2xl font-bold">Schedule Practice</h2>
-                                <p className="text-blue-100 text-sm mt-1">Connecting with {selectedPeer.name}</p>
+                            <div className="relative z-10">
+                                <h2 className="text-xl sm:text-2xl font-bold">Schedule Practice</h2>
+                                <p className="text-blue-100 text-xs sm:text-sm mt-1">Connecting with {selectedPeer.name}</p>
                             </div>
-                            <button onClick={() => setShowModal(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors relative z-10">
-                                <X size={24} />
+                            <button onClick={() => setShowModal(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors relative z-10 shrink-0">
+                                <X size={20} />
                             </button>
                         </div>
 
-                        <form onSubmit={handleScheduleSubmit} className="p-8">
-                            <div className="grid grid-cols-2 gap-4 mb-6">
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Date</label>
+                        <form onSubmit={handleScheduleSubmit} className="p-6 sm:p-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                                <div className="space-y-1.5">
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Date</label>
                                     <input
                                         type="date"
                                         required
                                         min={new Date().toISOString().split('T')[0]}
                                         value={scheduleDate}
                                         onChange={(e) => setScheduleDate(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm font-medium"
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Time</label>
+                                <div className="space-y-1.5">
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Time</label>
                                     <input
                                         type="time"
                                         required
                                         value={scheduleTime}
                                         onChange={(e) => setScheduleTime(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm font-medium"
                                     />
                                 </div>
                             </div>
 
-                            <div className="mb-8">
-                                <label className="block text-sm font-bold text-gray-700 mb-2">Personal Message (Optional)</label>
+                            <div className="mb-6 space-y-1.5">
+                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Personal Message</label>
                                 <textarea
                                     rows="3"
-                                    placeholder="Hi! I noticed we both know React and Node.js. Want to do a mock system design interview?"
+                                    placeholder="Hi! Wanted to practice React topics..."
                                     value={scheduleMessage}
                                     onChange={(e) => setScheduleMessage(e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none text-sm font-medium"
                                 ></textarea>
                             </div>
 
-                            <div className="flex gap-4">
-                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-colors">
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                <button type="button" onClick={() => setShowModal(false)} className="w-full sm:flex-1 py-3 bg-gray-50 text-gray-600 font-bold rounded-xl hover:bg-gray-100 transition-all text-sm border border-gray-100 order-last sm:order-first">
                                     Cancel
                                 </button>
-                                <button type="submit" disabled={scheduling} className="flex-1 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-70 flex items-center justify-center gap-2 shadow-md">
-                                    {scheduling ? <Loader2 className="animate-spin" size={20} /> : <Calendar size={20} />}
+                                <button type="submit" disabled={scheduling} className="w-full sm:flex-1 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all disabled:opacity-70 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 text-sm active:scale-95">
+                                    {scheduling ? <Loader2 className="animate-spin" size={18} /> : <Calendar size={18} />}
                                     Send Request
                                 </button>
                             </div>

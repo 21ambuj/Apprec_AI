@@ -126,24 +126,24 @@ const Chat = () => {
             <div className="bg-white rounded-3xl shadow-xl border border-slate-100 h-full flex overflow-hidden relative">
 
                 {/* Conversations Sidebar */}
-                <div className={`w-full md:w-1/3 border-r border-slate-100 flex flex-col bg-slate-50 relative z-10 ${activeChat ? 'hidden md:flex' : 'flex'}`}>
-                    <div className="p-6 border-b border-slate-200 bg-white">
-                        <h2 className="text-2xl font-bold text-slate-800 mb-4">Messages</h2>
+                <div className={`w-full md:w-1/3 lg:w-1/4 border-r border-slate-100 flex flex-col bg-slate-50 relative z-10 ${activeChat ? 'hidden md:flex' : 'flex'}`}>
+                    <div className="p-4 md:p-6 border-b border-slate-200 bg-white">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-4">Messages</h2>
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                             <input
                                 type="text"
-                                placeholder="Search conversations..."
-                                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                                placeholder="Search..."
+                                className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all"
                             />
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 overflow-y-auto custom-scrollbar">
                         {loading ? (
-                            <div className="p-6 text-center text-slate-500">Loading...</div>
+                            <div className="p-10 text-center text-slate-400 font-medium">Loading...</div>
                         ) : conversations.length === 0 ? (
-                            <div className="p-6 text-center text-slate-500">No conversations yet</div>
+                            <div className="p-10 text-center text-slate-400 font-medium">No messages yet</div>
                         ) : (
                             conversations.map(conv => {
                                 const otherUser = getOtherUser(conv);
@@ -153,14 +153,17 @@ const Chat = () => {
                                     <div
                                         key={conv._id}
                                         onClick={() => setActiveChat(conv)}
-                                        className={`p-4 border-b border-slate-100 cursor-pointer transition-colors flex gap-4 items-center ${isActive ? 'bg-blue-50 border-blue-100' : 'hover:bg-slate-100 bg-white'}`}
+                                        className={`p-4 border-b border-slate-100/50 cursor-pointer transition-all flex gap-3 items-center ${isActive ? 'bg-blue-50 border-blue-200 shadow-inner' : 'hover:bg-white bg-transparent'}`}
                                     >
-                                        <div className="w-12 h-12 rounded-full bg-slate-200 flex-shrink-0 flex items-center justify-center text-slate-500 font-bold overflow-hidden">
-                                            {otherUser?.profile?.avatar ? <img src={otherUser.profile.avatar} alt="avatar" className="w-full h-full object-cover" /> : <User />}
+                                        <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex-shrink-0 flex items-center justify-center text-slate-400 font-bold overflow-hidden shadow-sm">
+                                            {otherUser?.profile?.avatar ? <img src={otherUser.profile.avatar} alt="avatar" className="w-full h-full object-cover" /> : <User size={20} />}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold text-slate-800 truncate">{otherUser?.name || 'Unknown User'}</h4>
-                                            <p className="text-sm text-slate-500 truncate">
+                                            <div className="flex justify-between items-start mb-0.5">
+                                                <h4 className="font-bold text-slate-800 truncate text-sm">{otherUser?.name || 'Unknown User'}</h4>
+                                                <span className="text-[10px] text-slate-400 font-medium">{conv.lastMessage?.createdAt && new Date(conv.lastMessage.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}</span>
+                                            </div>
+                                            <p className="text-xs text-slate-500 truncate leading-tight">
                                                 {conv.lastMessage?.content || 'Start a conversation'}
                                             </p>
                                         </div>
@@ -172,44 +175,45 @@ const Chat = () => {
                 </div>
 
                 {/* Main Chat Area */}
-                <div className={`flex-1 flex col flex-col bg-slate-50 ${!activeChat ? 'hidden md:flex items-center justify-center' : ''}`}>
+                <div className={`flex-1 flex flex-col bg-slate-50 h-full ${!activeChat ? 'hidden md:flex items-center justify-center' : 'flex'}`}>
                     {!activeChat ? (
-                        <div className="text-center text-slate-400 m-auto">
-                            <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Send size={40} className="text-slate-300" />
+                        <div className="text-center text-slate-300">
+                            <div className="w-20 h-20 bg-white border border-slate-100 rounded-full flex items-center justify-center mx-auto mb-5 shadow-sm">
+                                <Send size={32} className="text-slate-200" />
                             </div>
-                            <h3 className="text-xl font-bold text-slate-600">Your Messages</h3>
-                            <p>Select a conversation to start chatting</p>
+                            <h3 className="text-lg font-bold text-slate-400">Select a Chat</h3>
+                            <p className="text-sm">Pick a contact to start messaging</p>
                         </div>
                     ) : (
                         <>
                             {/* Chat Header */}
-                            <div className="p-4 md:p-6 border-b border-slate-100 flex justify-between items-center bg-white shadow-sm z-10 shrink-0">
-                                <div className="flex items-center gap-4">
-                                    <button onClick={() => setActiveChat(null)} className="md:hidden p-2 -ml-2 text-slate-400 hover:text-slate-700">
+                            <div className="p-3 md:p-5 border-b border-slate-100 flex justify-between items-center bg-white shadow-sm z-20 shrink-0">
+                                <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
+                                    <button onClick={() => setActiveChat(null)} className="md:hidden p-2 -ml-1 text-slate-400 hover:text-slate-600 transition-colors">
                                         <ArrowLeft size={20} />
                                     </button>
-                                    <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 overflow-hidden">
-                                        {getOtherUser(activeChat)?.profile?.avatar ? <img src={getOtherUser(activeChat).profile.avatar} className="w-full h-full object-cover" /> : <User size={20} />}
+                                    <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0 flex items-center justify-center text-slate-400 overflow-hidden shadow-sm">
+                                        {getOtherUser(activeChat)?.profile?.avatar ? <img src={getOtherUser(activeChat).profile.avatar} className="w-full h-full object-cover" /> : <User size={18} />}
                                     </div>
-                                    <div>
-                                        <h3 className="font-bold text-slate-800">{getOtherUser(activeChat)?.name}</h3>
-                                        <p className="text-xs text-green-500 font-medium flex items-center gap-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> Available for Call
-                                        </p>
+                                    <div className="min-w-0">
+                                        <h3 className="font-bold text-slate-800 text-sm md:text-base truncate">{getOtherUser(activeChat)?.name}</h3>
+                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                            <span className="text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-wider">Online</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex gap-2">
+                                <div className="flex gap-1 md:gap-2 shrink-0">
                                     {user?.role === 'recruiter' && (
                                         <>
-                                            <button onClick={() => setShowScheduleModal(true)} className="p-2.5 rounded-full text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Schedule Call">
-                                                <Calendar size={20} />
+                                            <button onClick={() => setShowScheduleModal(true)} className="p-2 md:p-2.5 rounded-lg text-slate-400 hover:bg-slate-50 hover:text-blue-600 transition-all border border-transparent hover:border-slate-100" title="Schedule Call">
+                                                <Calendar size={18} />
                                             </button>
-                                            <button onClick={() => handleCall(false)} className="p-2.5 rounded-full text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Voice Call">
-                                                <Phone size={20} />
+                                            <button onClick={() => handleCall(false)} className="p-2 md:p-2.5 rounded-lg text-slate-400 hover:bg-slate-50 hover:text-green-600 transition-all border border-transparent hover:border-slate-100" title="Voice Call">
+                                                <Phone size={18} />
                                             </button>
-                                            <button onClick={() => handleCall(true)} className="p-2.5 rounded-full text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition-colors" title="Video Call">
-                                                <Video size={20} />
+                                            <button onClick={() => handleCall(true)} className="p-2 md:p-2.5 rounded-lg text-slate-400 hover:bg-slate-50 hover:text-indigo-600 transition-all border border-transparent hover:border-slate-100" title="Video Call">
+                                                <Video size={18} />
                                             </button>
                                         </>
                                     )}
@@ -271,21 +275,21 @@ const Chat = () => {
                             </AnimatePresence>
 
                             {/* Messages List bg */}
-                            <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-50 space-y-4">
+                            <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-50/50 space-y-4 custom-scrollbar">
                                 {messages.map((msg, i) => {
                                     const isMe = msg.sender === user._id;
                                     return (
                                         <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
                                             key={msg._id || i}
                                             className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}
                                         >
-                                            <div className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-3 ${isMe ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-white border border-slate-200 text-slate-800 rounded-bl-sm shadow-sm'}`}>
-                                                <p className="leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
-                                                <span className={`text-[10px] mt-1 block ${isMe ? 'text-blue-200 hover:text-white' : 'text-slate-400'}`}>
+                                            <div className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-2.5 shadow-sm ${isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white border border-slate-200 text-slate-800 rounded-bl-none'}`}>
+                                                <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                                                <div className={`text-[10px] mt-1.5 flex items-center gap-1 font-medium ${isMe ? 'text-blue-200 justify-end' : 'text-slate-400'}`}>
                                                     {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                                </span>
+                                                </div>
                                             </div>
                                         </motion.div>
                                     )
@@ -294,21 +298,21 @@ const Chat = () => {
                             </div>
 
                             {/* Message Input */}
-                            <div className="p-4 bg-white border-t border-slate-200 shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-                                <form onSubmit={handleSendMessage} className="flex gap-3 max-w-4xl mx-auto">
+                            <div className="p-3 md:p-4 bg-white border-t border-slate-100 shrink-0 shadow-lg">
+                                <form onSubmit={handleSendMessage} className="flex gap-2 max-w-4xl mx-auto">
                                     <input
                                         type="text"
                                         value={newMessage}
                                         onChange={(e) => setNewMessage(e.target.value)}
-                                        className="flex-1 px-5 py-3 bg-slate-50 border border-slate-200 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-sm"
-                                        placeholder="Type your message..."
+                                        className="flex-1 px-4 md:px-5 py-2.5 md:py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm md:text-base"
+                                        placeholder="Message..."
                                     />
                                     <button
                                         type="submit"
                                         disabled={!newMessage.trim()}
-                                        className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:-translate-y-0.5"
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-all shadow-md active:scale-95 disabled:opacity-50 shrink-0"
                                     >
-                                        <Send size={18} className="translate-x-[-1px] translate-y-[1px]" />
+                                        <Send size={18} className="md:translate-x-0.5" />
                                     </button>
                                 </form>
                             </div>

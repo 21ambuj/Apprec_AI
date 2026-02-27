@@ -118,21 +118,21 @@ const JobSearch = () => {
                             <span className="text-blue-600">✨</span> Smart Matches for You
                         </h2>
                         {smartMatches.length > 0 ? (
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {smartMatches.map((job) => (
-                                    <div key={job._id} className="bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 p-6 rounded-xl shadow-md border border-blue-100 dark:border-blue-800/50 hover:shadow-lg transition-all relative overflow-hidden">
-                                        <div className={`absolute top-0 right-0 text-white text-xs px-2 py-1 rounded-bl-lg font-bold ${job.matchScore >= 75 ? 'bg-emerald-600' :
+                                    <div key={job._id} className="bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 p-5 sm:p-6 rounded-xl shadow-md border border-blue-100 dark:border-blue-800/50 hover:shadow-lg transition-all relative overflow-hidden">
+                                        <div className={`absolute top-0 right-0 text-white text-[10px] px-2 py-1 rounded-bl-lg font-bold ${job.matchScore >= 75 ? 'bg-emerald-600' :
                                             job.matchScore >= 50 ? 'bg-amber-500' : 'bg-rose-500'
                                             }`}>
                                             Recommended
                                         </div>
                                         <div className="flex justify-between items-start mb-4">
                                             <div>
-                                                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">{job.title}</h3>
+                                                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1 pr-6">{job.title}</h3>
                                                 <div className="flex items-center gap-1">
-                                                    <p className="text-blue-600 dark:text-blue-400 font-medium">{job.company}</p>
+                                                    <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">{job.company}</p>
                                                     {job.recruiterId?.isVerified && (
-                                                        <CheckCircle2 size={16} className="text-blue-500 fill-blue-50" title="Verified Recruiter" />
+                                                        <CheckCircle2 size={14} className="text-blue-500 fill-blue-50" title="Verified Recruiter" />
                                                     )}
                                                 </div>
                                             </div>
@@ -140,23 +140,25 @@ const JobSearch = () => {
 
                                         <div className="space-y-2 mb-6">
                                             <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
-                                                <MapPin size={16} /> {job.location}
+                                                <MapPin size={16} className="shrink-0" /> {job.location}
                                             </div>
                                             <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
-                                                <IndianRupee size={16} /> {job.salaryRange ? `₹${job.salaryRange.min.toLocaleString('en-IN')} - ₹${job.salaryRange.max.toLocaleString('en-IN')}` : 'Salary not specified'}
+                                                <IndianRupee size={16} className="shrink-0" /> {job.salaryRange ? `₹${job.salaryRange.min.toLocaleString('en-IN')} - ₹${job.salaryRange.max.toLocaleString('en-IN')}` : 'Salary not specified'}
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-3">
-                                            <button onClick={() => handleAnalyzeMatch(job._id)} className="flex-1 flex justify-center items-center gap-1 bg-indigo-50 text-indigo-700 font-bold py-2 rounded-lg hover:bg-indigo-100 border border-indigo-200 transition-colors">
-                                                <Sparkles size={16} /> Pre-Check
+                                        <div className="flex flex-col sm:flex-row gap-2 mt-auto">
+                                            <button onClick={() => handleAnalyzeMatch(job._id)} className="flex-1 flex justify-center items-center gap-1 bg-indigo-50 text-indigo-700 font-bold py-2 rounded-lg hover:bg-indigo-100 border border-indigo-200 transition-colors text-sm">
+                                                <Sparkles size={14} /> AI Pre-Check
                                             </button>
-                                            <Link to={`/jobs/${job._id}`} className="flex-1 text-center bg-white border border-blue-600 text-blue-600 font-medium py-2 rounded-lg hover:bg-blue-50 transition-colors">
-                                                Details
-                                            </Link>
-                                            <button onClick={() => handleApply(job._id)} className="flex-1 bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                                Apply
-                                            </button>
+                                            <div className="flex gap-2 flex-1">
+                                                <Link to={`/jobs/${job._id}`} className="flex-1 text-center bg-white border border-blue-600 text-blue-600 font-bold py-2 rounded-lg hover:bg-blue-50 transition-colors text-sm">
+                                                    Details
+                                                </Link>
+                                                <button onClick={() => handleApply(job._id)} className="flex-1 bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                                    Apply
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -171,20 +173,20 @@ const JobSearch = () => {
 
                 {/* Search Bar */}
                 <div className="max-w-2xl mx-auto mb-12">
-                    <form onSubmit={handleSearch} className="flex gap-4">
+                    <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3 sm:gap-4 px-2">
                         <div className="relative flex-1">
                             <Search className="absolute left-4 top-3.5 text-gray-400 dark:text-gray-500" size={20} />
                             <input
                                 type="text"
-                                placeholder="Search by job title, company, or keywords..."
-                                className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                                placeholder="Search by job title or keywords..."
+                                className="w-full pl-12 pr-4 py-3 sm:py-3.5 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                         <button
                             type="submit"
-                            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-sm"
+                            className="bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20 active:scale-95"
                         >
                             Search
                         </button>
@@ -197,47 +199,49 @@ const JobSearch = () => {
                 ) : (
                     <>
                         <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-6">All Jobs</h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {jobs.length > 0 ? (
                                 jobs.map((job) => (
-                                    <div key={job._id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700">
+                                    <div key={job._id} className="bg-white dark:bg-gray-800 p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 flex flex-col h-full">
                                         <div className="flex justify-between items-start mb-4">
-                                            <div>
-                                                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">{job.title}</h3>
+                                            <div className="flex-1 min-w-0 pr-2">
+                                                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1 truncate">{job.title}</h3>
                                                 <div className="flex items-center gap-1">
-                                                    <p className="text-blue-600 dark:text-blue-400 font-medium">{job.company}</p>
+                                                    <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">{job.company}</p>
                                                     {job.recruiterId?.isVerified && (
-                                                        <CheckCircle2 size={16} className="text-blue-500 fill-blue-50" title="Verified Recruiter" />
+                                                        <CheckCircle2 size={14} className="text-blue-500 fill-blue-50" title="Verified Recruiter" />
                                                     )}
                                                 </div>
                                             </div>
-                                            <span className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs px-3 py-1 rounded-full font-medium">
+                                            <span className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] px-2 py-1 rounded-full font-bold uppercase shrink-0">
                                                 {job.type}
                                             </span>
                                         </div>
 
-                                        <div className="space-y-2 mb-6">
+                                        <div className="space-y-2 mb-6 flex-1">
                                             <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
-                                                <MapPin size={16} /> {job.location}
+                                                <MapPin size={16} className="shrink-0" /> {job.location}
                                             </div>
                                             <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
-                                                <IndianRupee size={16} /> {job.salaryRange ? `₹${job.salaryRange.min.toLocaleString('en-IN')} - ₹${job.salaryRange.max.toLocaleString('en-IN')}` : 'Salary not specified'}
+                                                <IndianRupee size={16} className="shrink-0" /> {job.salaryRange ? `₹${job.salaryRange.min.toLocaleString('en-IN')}` : 'Salary Hidden'}
                                             </div>
-                                            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm">
-                                                <Briefcase size={16} /> {job.requirements.slice(0, 2).join(', ')}...
+                                            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mt-3 bg-gray-50 dark:bg-gray-900/50 p-2 rounded-lg italic line-clamp-2">
+                                                <Briefcase size={14} className="shrink-0" /> {job.requirements.join(', ')}
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-3">
-                                            <button onClick={() => handleAnalyzeMatch(job._id)} className="flex-1 flex justify-center items-center gap-1 bg-indigo-50 text-indigo-700 font-bold py-2 rounded-lg hover:bg-indigo-100 border border-indigo-200 transition-colors">
-                                                <Sparkles size={16} /> Pre-Check
+                                        <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-gray-50 dark:border-gray-700">
+                                            <button onClick={() => handleAnalyzeMatch(job._id)} className="flex-1 flex justify-center items-center gap-1 bg-indigo-50 text-indigo-700 font-bold py-2 rounded-lg hover:bg-indigo-100 border border-indigo-200 transition-colors text-xs">
+                                                <Sparkles size={14} /> AI Analysis
                                             </button>
-                                            <Link to={`/jobs/${job._id}`} className="flex-1 text-center border border-blue-600 text-blue-600 font-bold py-2 rounded-lg hover:bg-blue-50 transition-colors">
-                                                Details
-                                            </Link>
-                                            <button onClick={() => handleApply(job._id)} className="flex-1 bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                                Apply
-                                            </button>
+                                            <div className="flex gap-2 flex-1">
+                                                <Link to={`/jobs/${job._id}`} className="flex-1 text-center border-2 border-blue-600 text-blue-600 font-bold py-2 rounded-lg hover:bg-blue-50 transition-colors text-xs">
+                                                    Info
+                                                </Link>
+                                                <button onClick={() => handleApply(job._id)} className="flex-1 bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                                                    Apply
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))
@@ -258,7 +262,7 @@ const JobSearch = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl dark:shadow-gray-900/60 w-full max-w-xl overflow-hidden"
+                            className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl dark:shadow-gray-900/60 w-full max-w-xl overflow-y-auto max-h-[90vh] custom-scrollbar"
                         >
                             <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-6 text-white relative flex justify-between items-center">
                                 <div className="flex items-center gap-3">
@@ -296,7 +300,7 @@ const JobSearch = () => {
                                             </div>
                                         </div>
 
-                                        <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
                                             <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100">
                                                 <h4 className="font-bold text-emerald-800 flex items-center gap-2 mb-3">
                                                     <CheckCircle2 size={18} /> What you have

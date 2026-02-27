@@ -44,24 +44,24 @@ const SettingsPage = () => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-8 md:p-12 overflow-y-auto w-full">
-                <header className="mb-10">
-                    <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">Settings</h1>
-                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-lg">Manage your preferences and account settings.</p>
+            <main className="flex-1 p-6 md:p-12 overflow-y-auto w-full">
+                <header className="mb-8 md:mb-10 text-center md:text-left">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">Settings</h1>
+                    <p className="text-gray-500 dark:text-gray-400 mt-2 text-base md:text-lg">Manage your preferences and account settings.</p>
                 </header>
 
                 <div className="max-w-3xl space-y-8">
                     {/* Display Settings */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Display Settings</h2>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-6">Display Settings</h2>
 
-                        <div className="flex items-center justify-between">
-                            <div>
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="text-center sm:text-left">
                                 <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
                                     {isDark ? '🌙 Dark Mode' : '☀️ Light Mode'}
                                 </h3>
                                 <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                                    Switch between light and dark themes. Your preference is saved automatically.
+                                    Switch between light and dark themes.
                                 </p>
                             </div>
                             <button
@@ -79,31 +79,31 @@ const SettingsPage = () => {
                     </div>
 
                     {/* Account Settings */}
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-                        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Account</h2>
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-6">Account</h2>
 
                         <div className="space-y-4">
-                            <div className="flex items-center justify-between py-4 border-b border-gray-100 dark:border-gray-700">
-                                <div>
-                                    <h3 className="font-semibold text-gray-900 dark:text-white">User Profile</h3>
-                                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">View and edit your personal information, skills, and resume.</p>
+                            <div className="flex flex-col sm:flex-row items-center justify-between py-6 border-b border-gray-100 dark:border-gray-700 gap-4">
+                                <div className="text-center sm:text-left">
+                                    <h3 className="font-semibold text-gray-900 dark:text-white text-lg">User Profile</h3>
+                                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Manage your professional identity.</p>
                                 </div>
                                 <button
                                     onClick={() => navigate('/profile')}
-                                    className="px-6 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-800 transition-colors"
+                                    className="w-full sm:w-auto px-6 py-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-800 transition-all active:scale-95"
                                 >
                                     Manage Profile
                                 </button>
                             </div>
 
-                            <div className="flex items-center justify-between py-4">
-                                <div>
-                                    <h3 className="font-semibold text-red-600 dark:text-red-400">Log Out</h3>
-                                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Securely end your current session.</p>
+                            <div className="flex flex-col sm:flex-row items-center justify-between py-6 gap-4">
+                                <div className="text-center sm:text-left">
+                                    <h3 className="font-semibold text-red-600 dark:text-red-400 text-lg">Log Out</h3>
+                                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Securely end your session.</p>
                                 </div>
                                 <button
                                     onClick={logout}
-                                    className="flex items-center gap-2 px-6 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 text-red-600 dark:text-red-400 font-bold rounded-lg hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 text-red-600 dark:text-red-400 font-bold rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-all active:scale-95"
                                 >
                                     <LogOut size={18} /> Logout
                                 </button>

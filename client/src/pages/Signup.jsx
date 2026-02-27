@@ -34,11 +34,11 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-8">
-            <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 p-8 relative border border-transparent dark:border-gray-700">
-                <Link to="/" className="absolute top-6 left-6 text-gray-400 hover:text-blue-600 transition-colors flex items-center gap-2 text-sm font-semibold">
-                    <ArrowLeft size={18} /> Home
+            <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-3xl shadow-xl dark:shadow-gray-900/50 p-6 sm:p-10 relative border border-gray-100 dark:border-gray-700 mx-auto transition-all">
+                <Link to="/" className="absolute top-6 left-6 text-gray-400 hover:text-blue-600 transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                    <ArrowLeft size={16} /> <span className="hidden sm:inline">Back to</span> Home
                 </Link>
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6 mt-4">Create Account</h2>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 dark:text-white mb-8 mt-10">Create Account</h2>
 
                 {error && (
                     <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -46,68 +46,71 @@ const Signup = () => {
                     </div>
                 )}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Full Name</label>
+                    <div className="space-y-1.5">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">Full Name</label>
                         <input
                             type="text"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
+                            placeholder="John Doe"
                         />
                     </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+                    <div className="space-y-1.5">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">Email Address</label>
                         <input
                             type="email"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            placeholder="name@company.com"
                         />
                     </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Password</label>
+                    <div className="space-y-1.5">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">Password</label>
                         <input
                             type="password"
-                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            placeholder="••••••••"
                         />
                     </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">I am a...</label>
-                        <div className="flex gap-4">
-                            <label className="flex items-center gap-2 cursor-pointer">
+                    <div className="space-y-2">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">I am a...</label>
+                        <div className="flex gap-6">
+                            <label className="flex items-center gap-2.5 cursor-pointer group">
                                 <input
                                     type="radio"
                                     name="role"
                                     value="candidate"
                                     checked={role === 'candidate'}
                                     onChange={(e) => setRole(e.target.value)}
-                                    className="accent-blue-600"
+                                    className="w-4 h-4 accent-blue-600 transition-transform group-hover:scale-110"
                                 />
-                                <span>Job Seeker</span>
+                                <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-blue-600 transition-colors">Job Seeker</span>
                             </label>
-                            <label className="flex items-center gap-2 cursor-pointer">
+                            <label className="flex items-center gap-2.5 cursor-pointer group">
                                 <input
                                     type="radio"
                                     name="role"
                                     value="recruiter"
                                     checked={role === 'recruiter'}
                                     onChange={(e) => setRole(e.target.value)}
-                                    className="accent-blue-600"
+                                    className="w-4 h-4 accent-blue-600 transition-transform group-hover:scale-110"
                                 />
-                                <span>Recruiter</span>
+                                <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-blue-600 transition-colors">Recruiter</span>
                             </label>
                         </div>
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors mt-2"
+                        className="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95 text-lg mt-4"
                     >
-                        Sign Up
+                        Create Account
                     </button>
                 </form>
                 <p className="mt-6 text-center text-gray-600">
